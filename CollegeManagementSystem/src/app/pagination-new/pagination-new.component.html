@@ -1,0 +1,40 @@
+<nav aria-label="page navigation example">
+  <ul class="pagination">
+    <li class="page-item" (click)="onClickPage(activePage - 1)">
+      <button
+        [disabled]="activePage === 1"
+        class="page-link"
+        href="javascript:void(0);"
+      >
+        « Previous
+      </button>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="{ active: activePage === item }"
+      *ngFor="let item of pages"
+      (click)="onClickPage(item)"
+    >
+      <button class="page-link" href="javascript:void(0);">{{ item }}</button>
+    </li>
+    <li class="page-item" (click)="onClickPage(activePage + 1)">
+      <button
+        [disabled]="activePage === pages[pages.length - 1]"
+        class="page-link"
+        href="javascript:void(0);"
+      >
+        Next »
+      </button>
+    </li>
+    <li class="page-item mr-1">
+      <b style="color:blue">Page Size:</b>
+      <input
+        type="number"
+        class="pagination__current-page"
+        (input)="onSetSize($event)"
+        [value]="pageSize"
+        style="width:30px;"
+      />
+    </li>
+  </ul>
+</nav>

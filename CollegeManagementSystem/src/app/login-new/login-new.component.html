@@ -1,0 +1,36 @@
+-<div class="container-sm">
+  <br>
+  <h2 style="text-align:center">Welcome User</h2>
+  <p style="text-align:center">Please login to continue</p>
+  <img src="assets\icon.png" alt="No img" class="rounded mx-auto d-block" style="height:200px; width: 200px">
+  <form [formGroup]="angForm">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="username" class="form-control" id="username" placeholder="Enter username" formControlName="username"
+        #username>
+      <span class="error" *ngIf="angForm.controls['username'].invalid && angForm.controls['username'].touched">
+        <div *ngIf="angForm.controls['username'].errors.required">Required field</div>
+        <div *ngIf="angForm.controls['username'].errors.minlength">Min 3 characters required</div>
+        <div *ngIf="angForm.controls['username'].errors.pattern">Invalid pattern</div>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter password" formControlName="password"
+        #password>
+      <span class="error" *ngIf="angForm.controls['password'].invalid && angForm.controls['password'].touched">
+        <div *ngIf="angForm.controls['password'].errors.required">Required field></div>
+        <div *ngIf="angForm.controls['password'].errors.minlength">Min 3 characters required</div>
+        <div *ngIf="angForm.controls['password'].errors.pattern">Invalid pattern</div>
+
+      </span>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="remember"> Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="angForm.invalid" (click)="submit(username.value,password.value)">Submit</button>
+  </form>
+</div>
+<modal #modal [modalConfig]="modalConfig">
+Invalid login credentials  
+</modal>

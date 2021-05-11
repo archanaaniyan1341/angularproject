@@ -1,0 +1,123 @@
+<div *ngIf="currentStudent">
+  <div style="width: 500px; margin: auto;">
+    <div class="edit-form">
+      <h4>
+        <b>{{ currentStudent.name }} Details</b>
+      </h4>
+      <form>
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input
+            type="number"
+            class="form-control"
+            id="id"
+            [(ngModel)]="currentStudent.id"
+            name="id"
+          />
+        </div>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            [(ngModel)]="currentStudent.name"
+            name="name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <input
+            type="text"
+            class="form-control"
+            id="gender"
+            [(ngModel)]="currentStudent.gender"
+            name="gender"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="stream">Stream</label>
+          <input
+            type="text"
+            class="form-control"
+            id="stream"
+            [(ngModel)]="currentStudent.stream"
+            name="stream"
+          />
+        </div>
+        <div class="form-group">
+          <label for="marks">Marks</label>
+          <input
+            type="number"
+            class="form-control"
+            id="marks"
+            [(ngModel)]="currentStudent.marks"
+            name="marks"
+          />
+        </div>
+      </form>
+      <button class="btn btn-danger mr-1" (click)="deleteStudent()">
+        Delete
+      </button>
+
+      <button type="submit" class="btn btn-success" (click)="updateStudent()">
+        Update
+      </button>
+      <!-- <button class="badge badge-light" (click)="goBack()">
+        Back
+      </button> -->
+    </div>
+  </div>
+</div>
+<div *ngIf="!currentStudent">
+  <br />
+  <p>This Student is not accessible</p>
+</div>
+<!-- <div *ngIf="!update">
+  <div *ngIf="currentStudent" class="container-md">
+    <br />
+    <h2>
+      <u>{{ currentStudent.name }} Details</u>
+    </h2>
+    <br />
+    <table>
+      <tr>
+        <th>ID</th>
+        <td>:{{ currentStudent.id }}</td>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <td>:{{ currentStudent.name }}</td>
+      </tr>
+      <tr>
+        <th>Gender</th>
+        <td>:{{ currentStudent.gender }}</td>
+      </tr>
+      <tr>
+        <th>Stream</th>
+        <td>:{{ currentStudent.stream }}</td>
+      </tr>
+      <tr>
+        <th>Marks</th>
+        <td>:{{ currentStudent.marks }}</td>
+      </tr>
+    </table>
+
+    <br />
+    <button class="btn btn-primary" (click)="updateS()">Edit</button>
+    <button class="btn btn-danger" (click)="deleteStudent()">
+      Delete
+    </button>
+  </div>
+  <div *ngIf="!currentStudent">
+    <br />
+    <p>This Student is not accessible</p>
+  </div>
+</div> -->
+<modal #modal [modalConfig]="modalConfig">
+  {{ currentStudent.name }} details updated successfully!!
+</modal>
+<modal #modal1 [modalConfig]="modalConfig1">
+  {{ currentStudent.name }} details deleted successfully!!
+</modal>

@@ -1,0 +1,76 @@
+<nav aria-label="page navigation example">
+  <ul class="pagination">
+    <li
+      class="page-item"
+      [ngClass]="currentPage === 1 && 'pagination__button--disabled'"
+      (click)="onFirstPage()"
+    >
+      <button class="btn btn-primary mr-1">First</button>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="currentPage === 1 && 'pagination__button--disabled'"
+      (click)="onPreviousPage()"
+    >
+      <button
+        class="btn btn-outline-primary mr-1"
+        [disabled]="currentPage === 1"
+      >
+        <
+      </button>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="currentPage === 1 && 'pagination__button--disabled'"
+      *ngFor="let i of pagearray"
+      (click)="pageNumber(i)"
+    >
+      <button class="btn btn-outline-primary mr-1">
+        {{ i }}
+      </button>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="
+        currentPage === allPagesNumber && 'pagination__button--disabled'
+      "
+      (click)="onNextPage()"
+    >
+      <button
+        class="btn btn-outline-primary mr-1"
+        [disabled]="currentPage === allPagesNumber"
+      >
+        >
+      </button>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="
+        currentPage === allPagesNumber && 'pagination__button--disabled'
+      "
+      (click)="onLastPage()"
+    >
+      <button class="btn btn-primary mr-1">Last</button>
+    </li>
+    <li class="page-item mr-1">
+      Page Size:<input
+        type="number"
+        class="pagination__current-page"
+        (input)="onSetSize($event)"
+        [value]="pageSize"
+        style="width:30px;"
+      />
+    </li>
+    Page
+    <li class="page-item mr-1">
+      <input
+        type="number"
+        class="pagination__current-page"
+        (input)="onSetPage($event)"
+        [value]="currentPage"
+        style="width:40px;"
+      />
+      of <span>{{ allPagesNumber }}</span>
+    </li>
+  </ul>
+</nav>
