@@ -1,24 +1,37 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="authentication()" >
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="authentication()">
   <a href="#" class="navbar-brand">Student Management System</a>
   <div class="navbar-nav mr-auto">
     <li class="nav-item">
       <a routerLink="/home" class="nav-link">Home</a>
     </li>
     <li class="nav-item">
-        <a routerLink="/about" class="nav-link">About</a>
-      </li>
+      <a routerLink="/about" class="nav-link">About</a>
+    </li>
     <li class="nav-item">
       <a routerLink="/list" class="nav-link">Student List</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/newlist" class="nav-link">List</a>
     </li>
     <li class="nav-item">
       <a routerLink="/create" class="nav-link">Add Student</a>
     </li>
     <li class="nav-item dropdown" ngbDropdown>
-      <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown"
-        aria-expanded="false" ngbDropdownToggle>
-        {{user}}
+      <a
+        class="nav-link dropdown-toggle"
+        id="navbarScrollingDropdown"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        ngbDropdownToggle
+      >
+        {{ user }}
       </a>
-      <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
+      <ul
+        class="dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="navbarScrollingDropdown"
+      >
         <li ngbDropdownItem>
           <div (click)="logout()">
             LogOut
@@ -27,8 +40,8 @@
       </ul>
     </li>
     <li class="nav-item">
-        <a routerLink="/" class="nav-link"></a>
-      </li>
+      <a routerLink="/" class="nav-link"></a>
+    </li>
   </div>
 </nav>
 

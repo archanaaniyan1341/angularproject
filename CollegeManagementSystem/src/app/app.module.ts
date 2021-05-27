@@ -25,9 +25,10 @@ import { NgMarqueeModule } from 'ng-marquee';
 import { PaginationService } from './service/pagination.service';
 import { PaginationNewComponent } from './pagination-new/pagination-new.component';
 import { ListComponent } from './list/list.component';
-import { DataCollectionComponent } from './data-table/data-table.component';
+
 import { AppMaterialModules } from './material.module';
-import { APIService } from './data-table/api.service';
+import { TableComponent } from './table/table.component';
+import { ReusableTableComponent } from './reusable-table/reusable-table.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import { APIService } from './data-table/api.service';
     AboutComponent,
     PaginationNewComponent,
     ListComponent,
-    DataCollectionComponent
+    TableComponent,
+    ReusableTableComponent
+
     //PaginationComponent,
   ],
   imports: [
@@ -59,13 +62,7 @@ import { APIService } from './data-table/api.service';
     Ng2SearchPipeModule,
     AppMaterialModules
   ],
-  providers: [
-    StudentService,
-    AuthService,
-    AuthGuardService,
-    PaginationService,
-    APIService
-  ],
+  providers: [StudentService, AuthService, AuthGuardService, PaginationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

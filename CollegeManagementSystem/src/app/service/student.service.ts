@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Student } from '../student';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,7 @@ import { Pageable } from '../pagination/pageable';
 })
 export class StudentService {
   private api_student = environment.baseUrl;
+  private api_display = environment.colUrl;
   httpHeader = {
     headers: new HttpHeaders({
       'content-Type': 'application/json'
@@ -26,14 +27,26 @@ export class StudentService {
       this.api_student + '?limit=' + limit + '&offset=' + offset
     );
   }
+  getStudentColPaginated(limit, offset, array) {
+    return this.http.get(
+      this.api_display +
+        '?limit=' +
+        limit +
+        '&offset=' +
+        offset +
+        '&col=' +
+        array
+    );
+  }
   public poststudentdetails(obj_s: Student): Observable<Student> {
     return this.http.post<Student>(this.api_student, obj_s, this.httpHeader);
   }
-  public deletestudentdetails(id: object) {
-    this.http.delete(this.api_student + '/' + id).subscribe(data => {
-      console.log(data);
+  public deletestudentdetails(id) {
+    this.http.delete(this.api_student + '/' + id).subscribe((data: any) => {
+      data = data.filter(x => x.id !== id);
     });
   }
+
   public getsinglestudentdetails(id: number) {
     return this.http.get(this.api_student + '/' + id);
   }

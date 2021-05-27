@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <div class="table table-bordered table-hover">
+    <thead>
+      <tr class="table table-info">
+        <th *ngFor="let key of colData">{{ key.header }}</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of gridData" (click)="onRowClick(record)">
+        <td *ngFor="let key of colData">
+          <span>{{ record[key.field] }}</span>
+        </td>
+        <td>
+          <button (click)="onRowDelete(record); $event.stopPropagation()">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </div>
+</div>

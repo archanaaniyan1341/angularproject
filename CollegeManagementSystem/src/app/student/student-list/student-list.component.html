@@ -17,47 +17,19 @@
       aria-labelledby="navbarScrollingDropdown"
     >
       <li ngbDropdownItem>
-        <input
-          type="checkbox"
-          [checked]="showID"
-          (change)="showID = !showID"
-        />ID
+        <button (click)="displayStream($event)">
+          showStream
+        </button>
       </li>
       <li ngbDropdownItem>
+        <button (click)="displayMarks($event)">showMarks</button>
+      </li>
+      <!-- <li ngbDropdownItem>
         <input
           type="checkbox"
           [checked]="showName"
           (change)="showName = !showName"
         />Name
-      </li>
-      <li ngbDropdownItem>
-        <input
-          type="checkbox"
-          [checked]="showGender"
-          (change)="showGender = !showGender"
-        />Gender
-      </li>
-      <li ngbDropdownItem>
-        <input
-          type="checkbox"
-          [checked]="showStream"
-          (change)="showStream = !showStream"
-        />
-        Stream
-      </li>
-      <li ngbDropdownItem>
-        <input
-          type="checkbox"
-          [checked]="showMarks"
-          (change)="showMarks = !showMarks"
-        />Marks
-      </li>
-      <!-- <li ngbDropdownItem>
-        <input
-          type="checkbox"
-          [checked]="showDel"
-          (change)="showDel = !showDel"
-        />Delete
       </li> -->
     </ul>
   </div>
@@ -72,98 +44,22 @@
   placeholder="Search by name"
 />
 <br />
-<table class="table table-hover">
-  <thead>
-    <tr class="table-info">
-      <th scope="col" *ngIf="showID">ID</th>
-      <th scope="col" *ngIf="showName">Name</th>
-      <th scope="col" *ngIf="showGender">Gender</th>
-      <th scope="col" *ngIf="showStream">Stream</th>
-      <th scope="col" *ngIf="showMarks">Marks</th>
-      <!-- <th scope="col" *ngIf="showDel">Delete</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let student of displayedData">
-      <td *ngIf="showID" routerLink="/detail/{{ student.id }}">
-        {{ student.id }}
-      </td>
-      <td *ngIf="showName" routerLink="/detail/{{ student.id }}">
-        {{ student.name }}
-      </td>
-      <td *ngIf="showGender" routerLink="/detail/{{ student.id }}">
-        {{ student.gender }}
-      </td>
-      <td *ngIf="showStream" routerLink="/detail/{{ student.id }}">
-        {{ student.stream }}
-      </td>
-      <td *ngIf="showMarks" routerLink="/detail/{{ student.id }}">
-        {{ student.marks }}
-      </td>
-      <!-- <td *ngIf="showDel">
-        <button
-          class="btn btn-danger"
-          title="delete student"
-          (click)="deletestudentdetails(student.id)"
-        >
-          &times;
-        </button>
-      </td> -->
-    </tr>
-  </tbody>
-</table>
+<app-reusable-table
+  [gridData]="userdata"
+  [colData]="colData"
+  (onRowSelection)="rowSelection($event)"
+  (onRowDeletion)="deleteStudentDetails($event)"
+></app-reusable-table>
 <div>
-  <br />
-  <app-pagination
-    [allPagesNumber]="allPages"
-    (changePage)="onPageChange($event)"
+  <app-pagination-new
+    [totalRecords]="totalvalue"
+    [recordsPerPage]="currentpageSize"
+    (onPageChange)="pageChanged($event)"
     (pageSizeEvent)="getPageInNewSize($event)"
-  ></app-pagination>
+  >
+  </app-pagination-new>
 </div>
+<!-- <app-table [columns]="colData" [rows]="userdata"></app-table> -->
 <modal #modal [modalConfig]="modalConfig">
   Student details has been deleted.
 </modal>
-<!-- Items Per Page:<input type="number" [(ngModel)]="itemsPerPage" style="width:35px"> -->
-<!-- <app-pagination>
-  
-        [page]="page"
-        (nextPageEvent)="getNextPage()"
-        (previousPageEvent)="getPreviousPage()"
-        (pageSizeEvent)="getPageInNewSize($event)">
-   
-</app-pagination> -->
-
-<!-- </div> -->
-<!-- <div class="container"> -->
-
-<!-- <li class="list-group-item list-group-item-action" id="list-home-list" 
-  data-toggle="list" routerLink="/detail/{{student.id}}" role="tab" aria-controls="home"
-   *ngFor="let student of fetchedData"> -->
-
-<!-- <div class="container">
-  <div *ngFor="let student of fetchedData">
-  <a routerLink="/detail/{{student.id}}">
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="assets\{{student.gender}}.png" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{student.name}}</h5>
-        <p class="card-text">ID:{{student.id}}</p>
-      </div>
-    </div>
-  </a>
-</div>  -->
-<!-- <div>
-  <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page=$event"></pagination-controls>
-</div> -->
-<!-- <table class="table table-striped table-hover">
-  <tr *ngFor="let student of displayedData">
-    <td>{{student.id}}</td>
-     <a routerLink="/detail/{{student.id}}"> 
-      <td>{{student.name}}</td>
-    </a>
-    <td><button class="delete" title="delete student"
-      (click)="deletestudentdetails(student.id)">&times;</button>
-     </td>
-  </tr>
-</table> -->
-<app-list></app-list>

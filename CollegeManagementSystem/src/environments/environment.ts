@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl:'http://localhost:8080/RestExa/student'
+  baseUrl: 'http://localhost:8080/RestExa/student',
+  colUrl: 'http://localhost:8080/RestExa/student/column'
 };
 
 /*

@@ -24,6 +24,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   { path: 'list', component: ListComponent, canActivate: [AuthGuardService] },
+  {
+    path: 'newlist',
+    component: StudentListComponent,
+    canActivate: [AuthGuardService]
+  },
   { path: 'login1', component: LoginNewComponent },
   { path: '', component: LoginNewComponent },
   { path: 'about', component: AboutComponent }

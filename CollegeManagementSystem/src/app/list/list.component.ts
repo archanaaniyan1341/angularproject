@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../student';
 import { Students } from '../students';
 import { StudentService } from '../service/student.service';
+import { ModalComponent } from '../modal/modal.component';
+import { ModalConfig } from '../modal/modal.config';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-list',
@@ -12,8 +15,6 @@ import { StudentService } from '../service/student.service';
 export class ListComponent implements OnInit {
   config: any;
   collection = { count: 60, data: [] };
-
-  angForm: FormGroup;
   userdata;
   fetchedData: Student[] = [];
   single_student_data: Student = new Students();
@@ -22,22 +23,32 @@ export class ListComponent implements OnInit {
   page = 1;
   count = 60;
   currentpageSize = 5;
-  //pageSizes = [3, 6, 9];
   offset: any;
   searchKey = ' ';
   totalvalue;
   name: any;
+  colData = [
+    { field: 'id', header: 'ID' },
+    { field: 'name', header: 'Name' },
+    { field: 'gender', header: 'Gender' },
+    { field: 'stream', header: 'Stream' },
+    { field: 'marks', header: 'Marks' }
+  ];
 
-  showID: boolean = true;
-  showName: boolean = true;
-  showGender: boolean = true;
-  showStream: boolean = true;
-  showMarks: boolean = true;
-  constructor(private obj_user: StudentService) {}
+  @ViewChild('modal') private modalComponent: ModalComponent;
+  modalConfig: ModalConfig = {
+    modalTitle: 'Deleted',
+    dismissButtonLabel: 'Ok',
+    closeButtonLabel: 'Close'
+  };
+  constructor(private obj_user: StudentService, public router: Router) {}
 
   ngOnInit(): void {
     this.getAllStudentDetails();
     this.gettotalRecords();
+  }
+  async openModal() {
+    return await this.modalComponent.open();
   }
   pageChanged(event) {
     this.page = event;
@@ -74,5 +85,15 @@ export class ListComponent implements OnInit {
         return res.name.toLowerCase().match(this.name.toLowerCase());
       });
     }
+  }
+  deleteStudentDetails(record: Student) {
+    this.obj_user.deletestudentdetails(record.id);
+    this.openModal();
+    delay(10000);
+    window.location.reload();
+    this.getAllStudentDetails();
+  }
+  rowSelection(record: Student) {
+    this.router.navigate(['/detail', record.id]);
   }
 }
